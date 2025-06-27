@@ -7,7 +7,7 @@ const SideBar = () => (
     <div>
       <S.Field type="text" placeholder="Search" />
       <S.Filters>
-        <CardFilter label="Pending" counter={1} />
+        <CardFilter label="In-progress" counter={1} />
         <CardFilter label="Done" counter={2} />
         <CardFilter label="Urgent" counter={3} />
         <CardFilter label="Important" counter={4} />
