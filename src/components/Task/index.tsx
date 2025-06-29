@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux'
 
 import * as S from './styles'
 
-import { removeTask, editTask } from '../../store/reducer/tasks'
+import { removeTask, editTask } from '../../store/reducers/tasks'
 import TaskClass from '../../models/Task'
 
 type Props = TaskClass

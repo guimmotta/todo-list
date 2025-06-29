@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux'
 import CardFilter from '../../components/CardFilter'
 import { RootReducer } from '../../store'
-import { setFilterTerm } from '../../store/reducer/filters'
+import { setFilterTerm } from '../../store/reducers/filters'
 
 import * as S from './styles'
 
