@@ -1,7 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import Task from '../../models/Task'
 import * as enums from '../../utils/enums/Task'
-import { Description } from '../../components/Task/styles'
 
 type TasksState = {
   itens: Task[]
@@ -39,10 +38,17 @@ const taskSlice = createSlice({
   reducers: {
     removeTask: (state, action: PayloadAction<number>) => {
       state.itens = state.itens.filter((task) => task.id !== action.payload)
+    },
+    editTask: (state, action: PayloadAction<Task>) => {
+      const TaskIndex = state.itens.findIndex((t) => t.id === action.payload.id)
+
+      if (TaskIndex >= 0) {
+        state.itens[TaskIndex] = action.payload
+      }
     }
   }
 })
 
-export const { removeTask } = taskSlice.actions
+export const { removeTask, editTask } = taskSlice.actions
 
 export default taskSlice.reducer

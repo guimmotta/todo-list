@@ -1,18 +1,35 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 
 import * as S from './styles'
 
-import * as enums from '../../utils/enums/Task'
-
-import { removeTask } from '../../store/reducer/Tasks'
+import { removeTask, editTask } from '../../store/reducer/Tasks'
 import TaskClass from '../../models/Task'
 
 type Props = TaskClass
 
-const Task = ({ title, priority, status, description, id }: Props) => {
+const Task = ({
+  title,
+  priority,
+  status,
+  description: originalDescription,
+  id
+}: Props) => {
   const dispatch = useDispatch()
   const [isEditing, setIsEditing] = useState(false)
+  const [description, setDescription] = useState('')
+
+  useEffect(() => {
+    if (originalDescription.length > 0) {
+      setDescription(originalDescription)
+    }
+  }, [originalDescription])
+
+  const cancelEdit = () => {
+    setIsEditing(false)
+    setDescription(originalDescription)
+  }
+
   return (
     <S.Card>
       <S.Title>{title}</S.Title>
@@ -22,12 +39,31 @@ const Task = ({ title, priority, status, description, id }: Props) => {
       <S.Tag parameter="status" status={status}>
         {status}
       </S.Tag>
-      <S.Description value={description} />
+      <S.Description
+        disabled={!isEditing}
+        value={description}
+        onChange={(event) => setDescription(event.target.value)}
+      />
       <S.Actions>
         {isEditing ? (
           <>
-            <S.buttonSave>Save</S.buttonSave>
-            <S.buttonCancelDelete onClick={() => setIsEditing(false)}>
+            <S.buttonSave
+              onClick={() => {
+                dispatch(
+                  editTask({
+                    title,
+                    priority,
+                    status,
+                    description,
+                    id
+                  })
+                )
+                setIsEditing(false)
+              }}
+            >
+              Save
+            </S.buttonSave>
+            <S.buttonCancelDelete onClick={() => cancelEdit()}>
               Cancel
             </S.buttonCancelDelete>
           </>
