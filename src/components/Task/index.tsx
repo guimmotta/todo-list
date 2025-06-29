@@ -13,19 +13,21 @@ const Task = ({ title, priority, status, description }: Props) => {
   return (
     <S.Card>
       <S.Title>{title}</S.Title>
-      <S.Tag>{priority}</S.Tag>
-      <S.Tag>{status}</S.Tag>
+      <S.Tag priority={priority}>{priority}</S.Tag>
+      <S.Tag status={status}>{status}</S.Tag>
       <S.Description value={description} />
       <S.Actions>
         {isEditing ? (
           <>
-            <S.Button>Save</S.Button>
-            <S.Button onClick={() => setIsEditing(false)}>Cancel</S.Button>
+            <S.buttonSave>Save</S.buttonSave>
+            <S.buttonCancelDelete onClick={() => setIsEditing(false)}>
+              Cancel
+            </S.buttonCancelDelete>
           </>
         ) : (
           <>
             <S.Button onClick={() => setIsEditing(true)}>Edit</S.Button>
-            <S.Button>Delete</S.Button>
+            <S.buttonCancelDelete>Delete</S.buttonCancelDelete>
           </>
         )}
       </S.Actions>
