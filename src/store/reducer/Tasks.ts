@@ -1,35 +1,44 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import Task from '../../models/Task'
 import * as enums from '../../utils/enums/Task'
+import { Description } from '../../components/Task/styles'
+
+type TasksState = {
+  itens: Task[]
+}
+
+const initialState: TasksState = {
+  itens: [
+    {
+      title: 'Learn Redux',
+      priority: enums.Priority.NORMAL,
+      status: enums.Status.INPROGRESS,
+      description: 'Study the Redux toolkit for state management',
+      id: 1
+    },
+    {
+      title: 'Build Todo App',
+      priority: enums.Priority.LOW,
+      status: enums.Status.INPROGRESS,
+      description: 'Create a todo application using React and Redux',
+      id: 2
+    },
+    {
+      title: 'Write Documentation',
+      priority: enums.Priority.HIGH,
+      status: enums.Status.DONE,
+      description: 'Document the project setup and usage',
+      id: 3
+    }
+  ]
+}
 
 const taskSlice = createSlice({
   name: 'tasks',
-  initialState: [
-    new Task(
-      'Learn Redux',
-      enums.Priority.NORMAL,
-      enums.Status.INPROGRESS,
-      'Study the Redux toolkit for state management',
-      1
-    ),
-    new Task(
-      'Build Todo App',
-      enums.Priority.LOW,
-      enums.Status.INPROGRESS,
-      'Create a todo application using React and Redux',
-      2
-    ),
-    new Task(
-      'Write Documentation',
-      enums.Priority.HIGH,
-      enums.Status.DONE,
-      'Document the project setup and usage',
-      3
-    )
-  ],
+  initialState,
   reducers: {
     removeTask: (state, action: PayloadAction<number>) => {
-      return state.filter((task) => task.id !== action.payload)
+      state.itens = state.itens.filter((task) => task.id !== action.payload)
     }
   }
 })
