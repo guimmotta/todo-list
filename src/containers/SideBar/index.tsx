@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import CardFilter from '../../components/CardFilter'
 import { RootReducer } from '../../store'
 import { setFilterTerm } from '../../store/reducers/filters'
+import * as enums from '../../utils/enums/Task'
 
 import * as S from './styles'
 
@@ -19,12 +20,32 @@ const SideBar = () => {
           onChange={(event) => dispatch(setFilterTerm(event.target.value))}
         />
         <S.Filters>
-          <CardFilter label="In-progress" counter={1} />
-          <CardFilter label="Done" counter={2} />
-          <CardFilter label="High" counter={3} />
-          <CardFilter label="Normal" counter={4} />
-          <CardFilter label="Low" counter={5} />
-          <CardFilter active label="All" counter={10} />
+          <CardFilter
+            value={enums.Status.INPROGRESS}
+            criteria="status"
+            label="In-progress"
+          />
+          <CardFilter
+            value={enums.Status.DONE}
+            criteria="status"
+            label="Done"
+          />
+          <CardFilter
+            value={enums.Priority.HIGH}
+            criteria="priority"
+            label="High"
+          />
+          <CardFilter
+            value={enums.Priority.NORMAL}
+            criteria="priority"
+            label="Normal"
+          />
+          <CardFilter
+            value={enums.Priority.LOW}
+            criteria="priority"
+            label="Low"
+          />
+          <CardFilter criteria="all" label="All" />
         </S.Filters>
       </div>
     </S.Aside>
