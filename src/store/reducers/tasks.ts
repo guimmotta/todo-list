@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import Task from '../../models/Task'
 import * as enums from '../../utils/enums/Task'
+import Register from '../../pages/register'
 
 type TasksState = {
   itens: Task[]
@@ -45,10 +46,22 @@ const taskSlice = createSlice({
       if (TaskIndex >= 0) {
         state.itens[TaskIndex] = action.payload
       }
+    },
+    register: (state, action: PayloadAction<Task>) => {
+      const TaskExists = state.itens.find(
+        (task) =>
+          task.title.toLowerCase() === action.payload.title.toLowerCase()
+      )
+
+      if (TaskExists) {
+        alert('Task already exists')
+      } else {
+        state.itens.push(action.payload)
+      }
     }
   }
 })
 
-export const { removeTask, editTask } = taskSlice.actions
+export const { removeTask, editTask, register } = taskSlice.actions
 
 export default taskSlice.reducer

@@ -5,6 +5,7 @@ import { setFilterTerm } from '../../store/reducers/filters'
 import * as enums from '../../utils/enums/Task'
 
 import * as S from './styles'
+import { Field } from '../../styles'
 
 const SideBar = () => {
   const dispatch = useDispatch()
@@ -13,7 +14,7 @@ const SideBar = () => {
   return (
     <S.Aside>
       <div>
-        <S.Field
+        <Field
           type="text"
           placeholder="Search"
           value={term}
