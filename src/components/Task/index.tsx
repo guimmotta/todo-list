@@ -13,8 +13,8 @@ type Props = TaskClass
 
 const Task = ({
   title,
-  priority,
-  status,
+  $priority,
+  $status,
   description: originalDescription,
   id
 }: Props) => {
@@ -43,7 +43,7 @@ const Task = ({
         <input
           type="checkbox"
           id={title}
-          checked={status === enums.Status.DONE}
+          checked={$status === enums.Status.DONE}
           onChange={changeTaskStatus}
         />
         <S.Title>
@@ -51,11 +51,11 @@ const Task = ({
           {title}
         </S.Title>
       </label>
-      <S.Tag parameter="priority" priority={priority}>
-        {priority}
+      <S.Tag $parameter="priority" $priority={$priority}>
+        {$priority}
       </S.Tag>
-      <S.Tag parameter="status" status={status}>
-        {status}
+      <S.Tag $parameter="status" $status={$status}>
+        {$status}
       </S.Tag>
       <S.Description
         disabled={!isEditing}
@@ -70,8 +70,8 @@ const Task = ({
                 dispatch(
                   editTask({
                     title,
-                    priority,
-                    status,
+                    $priority,
+                    $status,
                     description,
                     id
                   })

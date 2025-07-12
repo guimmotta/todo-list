@@ -13,7 +13,7 @@ const Forms = () => {
 
   const [title, setTitle] = useState('')
   const [description, setDescription] = useState('')
-  const [priority, setPriority] = useState(enums.Priority.NORMAL)
+  const [$priority, setPriority] = useState(enums.Priority.NORMAL)
 
   const registerTask = (event: FormEvent) => {
     event.preventDefault()
@@ -21,9 +21,9 @@ const Forms = () => {
     dispatch(
       register({
         title,
-        priority,
+        $priority,
         description,
-        status: enums.Status.INPROGRESS
+        $status: enums.Status.INPROGRESS
       })
     )
     navigate('/')
@@ -32,7 +32,7 @@ const Forms = () => {
   return (
     <MainContainer>
       <Title>New Task</Title>
-      <Form onSubmit={registerTask}>
+      <Form id="form" onSubmit={registerTask}>
         <Field
           value={title}
           onChange={(event) => setTitle(event.target.value)}

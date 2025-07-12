@@ -19,9 +19,9 @@ const TaskList = () => {
       )
 
       if (criteria === 'priority') {
-        filteredTasks = filteredTasks.filter((item) => item.priority === value)
+        filteredTasks = filteredTasks.filter((item) => item.$priority === value)
       } else if (criteria === 'status') {
-        filteredTasks = filteredTasks.filter((item) => item.status === value)
+        filteredTasks = filteredTasks.filter((item) => item.$status === value)
       }
 
       return filteredTasks
@@ -54,8 +54,8 @@ const TaskList = () => {
             <Task
               title={t.title}
               description={t.description}
-              priority={t.priority}
-              status={t.status}
+              $priority={t.$priority}
+              $status={t.$status}
               id={t.id}
             />
           </li>

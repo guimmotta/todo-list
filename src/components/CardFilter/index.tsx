@@ -12,7 +12,8 @@ export type Props = {
 
 const CardFilter = ({ label, criteria, value }: Props) => {
   const dispatch = useDispatch()
-  const { filter, tasks } = useSelector((state: RootReducer) => state)
+  const filter = useSelector((state: RootReducer) => state.filter)
+  const tasks = useSelector((state: RootReducer) => state.tasks)
 
   const isActive = () => {
     const sameCriteria = filter.criteria === criteria
@@ -24,10 +25,10 @@ const CardFilter = ({ label, criteria, value }: Props) => {
   const CountTasks = () => {
     if (criteria === 'all') return tasks.itens.length
     if (criteria === 'priority') {
-      return tasks.itens.filter((item) => item.priority === value).length
+      return tasks.itens.filter((item) => item.$priority === value).length
     }
     if (criteria === 'status') {
-      return tasks.itens.filter((item) => item.status === value).length
+      return tasks.itens.filter((item) => item.$status === value).length
     }
     return 0
   }
@@ -44,7 +45,7 @@ const CardFilter = ({ label, criteria, value }: Props) => {
   const active = isActive()
 
   return (
-    <S.Card active={active} onClick={toFilter}>
+    <S.Card $active={active} onClick={toFilter}>
       <S.Counter>{counter}</S.Counter>
       <S.Label>{label}</S.Label>
     </S.Card>

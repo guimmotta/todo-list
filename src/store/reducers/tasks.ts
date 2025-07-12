@@ -10,22 +10,22 @@ const initialState: TasksState = {
   itens: [
     {
       title: 'Learn Redux',
-      priority: enums.Priority.NORMAL,
-      status: enums.Status.INPROGRESS,
+      $priority: enums.Priority.NORMAL,
+      $status: enums.Status.INPROGRESS,
       description: 'Study the Redux toolkit for state management',
       id: 1
     },
     {
       title: 'Build Todo App',
-      priority: enums.Priority.LOW,
-      status: enums.Status.INPROGRESS,
+      $priority: enums.Priority.LOW,
+      $status: enums.Status.INPROGRESS,
       description: 'Create a todo application using React and Redux',
       id: 2
     },
     {
       title: 'Write Documentation',
-      priority: enums.Priority.HIGH,
-      status: enums.Status.DONE,
+      $priority: enums.Priority.HIGH,
+      $status: enums.Status.DONE,
       description: 'Document the project setup and usage',
       id: 3
     }
@@ -70,7 +70,7 @@ const taskSlice = createSlice({
       const TaskIndex = state.itens.findIndex((t) => t.id === action.payload.id)
 
       if (TaskIndex >= 0) {
-        state.itens[TaskIndex].status = action.payload.done
+        state.itens[TaskIndex].$status = action.payload.done
           ? enums.Status.DONE
           : enums.Status.INPROGRESS
       }
