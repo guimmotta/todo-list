@@ -5,7 +5,6 @@ import { useNavigate } from 'react-router-dom'
 import { ButtonSave, Field, MainContainer, Title } from '../../styles/'
 import { Form, Options, Option } from './styles'
 import * as enums from '../../utils/enums/Task'
-import Task from '../../models/Task'
 import { register } from '../../store/reducers/tasks'
 
 const Forms = () => {
@@ -18,14 +17,15 @@ const Forms = () => {
 
   const registerTask = (event: FormEvent) => {
     event.preventDefault()
-    const taskToRegister = new Task(
-      title,
-      priority,
-      enums.Status.INPROGRESS,
-      description,
-      1
+
+    dispatch(
+      register({
+        title,
+        priority,
+        description,
+        status: enums.Status.INPROGRESS
+      })
     )
-    dispatch(register(taskToRegister))
     navigate('/')
   }
 
